@@ -1,38 +1,53 @@
 var validation = {
-  function isEmpty(value)
-{
-  if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
-    return true
+  isEmpty: function(val)
+  {
+    if( val == "" || val == null || val == undefined || ( val != null && typeof val == "object" && !Object.keys(val).length ) ){
+      return true
+    }
+    return false;
+  },
+  regExpTest: function(val, regExp)
+  {
+    if(!validation.isEmpty(val) && val.match(regExp) !== null){
+      return true;
+    }
+    return false;
+  },
+  isEmail: function(val)
+  {
+    let regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    return validation.regExpTest(val, regExp);
+  },
+  isNumber: function(val)
+  {
+    let regExp = /^[0-9]+$/;
+    return validation.regExpTest(val, regExp);
+  },
+  isAlphabet: function(val)
+  {
+    let regExp = /^[A-Za-z]+$/;
+    return validation.regExpTest(val, regExp);
+  },
+  isKatakana: function(val){
+    let regExp =/^[ァ-ヶー\s]+$/;
+    return validation.regExpTest(val, regExp);
+  },
+  chkStrMinLength: function(val, leng){
+    if(typeof val === "string" && val.length > leng){
+      return true;
+    }
+    return false;
+  },
+  chkStrMaxLength: function(val, leng){
+    if(typeof val === "string" && val.length < leng){
+      return true;
+    }
+    return false;
+  },
+  isStrLength: function(val, minLeng, maxLeng){
+    if(validation.chkStrMinLength(val, minLeng) && validation.chkStrMaxLength(val, maxLeng)){
+      return true;
+    }
+    return false;
   }
-  return false;
-}
-
-function validationTest(value, regExp)
-{
-  if(!isEmpty(value) && value.match(regExp) !== null){
-    return true;
-  }
-  return false;
-}
-
-function isEmail(value)
-{
-  let regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-  
-  return validationTest(value, regExp);
-}
-
-function isNumber(value)
-{
-  let regExp = /^[0-9]+$/;
-  
-  return validationTest(value, regExp);
-}
-
-function isAlphabet(value)
-{
-  let regExp = /^[A-Za-z]+$/;
-  
-  return validationTest(value, regExp);
-}
 };
