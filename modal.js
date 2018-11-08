@@ -18,7 +18,6 @@ var modal = {
     for (let row in style) {
       blackScreenStyle[row] = style[row];
     }
-    
     let body = document.body;
     body.appendChild(blackScreen);
   }
