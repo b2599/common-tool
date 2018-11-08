@@ -1,6 +1,24 @@
 var modal = {
   openModal : function(){
-  
+    let modal = document.createElement('div');
+    let modalStyle = modal.style;
+    let style = {
+      width: '50%',
+      height: '50%',
+      top: '50%',
+      left: '50%',
+      position: 'fixed',
+      transform: 'translate(-50%,-50%)',
+      zIndex: 101,
+      backgroundColor: '#ffffff',
+      border: '1px solid #000000',
+      borderRadius: '8px'
+    };
+    for (let row in style) {
+      modalStyle[row] = style[row];
+    }
+    let body = document.body;
+    body.appendChild(modal);
   },
   openBlackScreen : function(){
     let blackScreen = document.createElement("div");
